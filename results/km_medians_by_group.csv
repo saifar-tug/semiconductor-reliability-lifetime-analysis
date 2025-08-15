@@ -1,0 +1,6 @@
+Test_Type,Temp_C,median_hours
+HTOL,125,703.9853204551994
+HTOL,150,269.9565337152055
+TC,-40,inf
+TC,125,inf
+THB,85,inf

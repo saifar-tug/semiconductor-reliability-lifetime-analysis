@@ -66,6 +66,7 @@ File: `results/arrhenius_fit_coeffs_HTOL.csv`
 - Used to extrapolate field lifetimes from high-temperature stress tests.
 
 ---
+
 ## Key Analyses  
 
 ### Kaplan–Meier Survival by Stress Group  
@@ -86,6 +87,7 @@ This was expected since HTOL at higher temperature quickly accelerates wear-out 
 ![Failure Density](results/density_by_testtype.png)  
 
 The wider HTOL distribution reflects device-to-device variation in how quickly transistors degrade. In contrast, TC and THB failures are more uniform since they’re driven by physical stress thresholds like **package cracking** or **moisture ingress**.  
+
 ---
 
 ### Weibull Parameters vs Temperature  
@@ -96,6 +98,7 @@ The wider HTOL distribution reflects device-to-device variation in how quickly t
 ![Weibull Parameters](results/weibull_group_params_vs_temp.png) 
 
 The rising β with temperature means the devices don’t fail randomly, instead they fail progressively faster as stress accumulates. Lower η at 150 °C confirms **temperature-activated aging** is dominant.  
+
 ---
 
 ### Weibull Probability Plots (Fit Quality Checks)  
@@ -157,15 +160,14 @@ python -m reliability_demo.cli --seed 2025
 # explore notebook
 jupyter notebook notebooks/reliability_pipeline.ipynb
 ```
+---
 
-## Limitations & Future Work  
-
-### Limitations  
+## Limitations  
 - Here Dataset is **synthetic**; real semiconductor data would show mixed failure modes and noisier censoring.  
 - Only **temperature acceleration (Arrhenius)** was modeled; real devices require multi-stress models (Eyring).  
 - Did not include **degradation parameters** (e.g., leakage, ΔVth).  
 
-### Future Work  
+## Future Work  
 - Extend to **multi-stress acceleration models** (temperature + voltage + humidity).  
 - Incorporate **degradation measurements** alongside failure times.  
 - Apply **Bayesian or hierarchical models** for lot-to-lot variation.  

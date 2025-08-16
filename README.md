@@ -11,7 +11,7 @@ The workflow includes:
 
 ## 🔍 Kaplan–Meier Survival by Stress Group
 **Purpose:** To visualize survival probability over time and compare stress conditions.  
-**Comments:** Higher temperature HTOL tests fail faster; low-stress TC and THB conditions show minimal degradation.
+**Comments:** Higher temperature HTOL tests fail faster, low-stress TC and THB conditions show minimal degradation.
 
 ![Kaplan–Meier Survival](results/km_by_group_publication.png)
 
@@ -54,13 +54,13 @@ The workflow includes:
 
 ### 🛠️ How to Run
 ```bash
-# run Python script
-python scripts/make_synthetic_reliability.py
-
 # better to have venv & install deps
 python3 -m venv venv
 source venv/bin/activate  # for Windows: venv\Scripts\activate
 pip install -r requirements.txt
+
+# run Python script
+python scripts/make_synthetic_reliability.py
 
 # launch Notebook
 jupyter notebook notebooks/reliability_analysis.ipynb

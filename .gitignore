@@ -1,26 +1,26 @@
-cat << 'EOF' > .gitignore
 # Python
 __pycache__/
 *.pyc
 *.pyo
-*.pyd
-*.pkl
 
-# Virtual environment
-venv/
-.env/
-.venv/
-
-# Jupyter
+# OS / Jupyter
+.DS_Store
 .ipynb_checkpoints/
 
-# OS
-.DS_Store
+# Virtual envs
+venv/
+.venv/
+.env/
 
-# Data (ignore all except synthetic CSV)
+# Local scratch notebooks
+notebooks_lab/
+
+# Scripts (redundant after refactor)
+scripts/
+
+# Tests (until you add real ones)
+tests/
+
+# Extra datasets (keep only synthetic public one)
 data/*
 !data/reliability_synthetic.csv
-
-# Results (track all PNG and CSV files)
-!results/*.png
-!results/*.csv

@@ -73,10 +73,7 @@ File: `results/arrhenius_fit_coeffs_HTOL.csv`
 - HTOL @ 125 °C lasts longer (median ≈ 704 h).  
 - THB (85 °C) and TC (-40 °C, 125 °C) show little degradation.  
 
-📈 Plot:  
 ![Kaplan–Meier Survival](results/km_by_group_publication.png)  
-
-**My Comment:**  
 
 This was expected since HTOL at higher temperature quickly accelerates wear-out mechanisms like **electromigration** and **oxide breakdown**, while humidity and thermal cycling take much longer to manifest failures.  
 
@@ -86,10 +83,7 @@ This was expected since HTOL at higher temperature quickly accelerates wear-out 
 - HTOL has a broad failure distribution due to combined **temperature + voltage** acceleration.  
 - TC and THB failures cluster tightly, with failures clustered around specific stress points.  
 
-📈 Plot:  
 ![Failure Density](results/density_by_testtype.png)  
-
-**My Comment:**
 
 The wider HTOL distribution reflects device-to-device variation in how quickly transistors degrade. In contrast, TC and THB failures are more uniform since they’re driven by physical stress thresholds like **package cracking** or **moisture ingress**.  
 ---
@@ -99,10 +93,7 @@ The wider HTOL distribution reflects device-to-device variation in how quickly t
 - **η decreases with temperature** (HTOL), confirming stress acceleration.  
 - TC/THB have higher η (longer lifetimes).  
 
-📈 Plot:  
 ![Weibull Parameters](results/weibull_group_params_vs_temp.png) 
-
-**My Comment:**
 
 The rising β with temperature means the devices don’t fail randomly, instead they fail progressively faster as stress accumulates. Lower η at 150 °C confirms **temperature-activated aging** is dominant.  
 ---
@@ -111,11 +102,8 @@ The rising β with temperature means the devices don’t fail randomly, instead 
 - Empirical points align closely with the Weibull fitted CDF.  
 - Confidence intervals are narrow, this is stable estimates.  
 
-📈 Plots:  
 ![Weibull Probability Plot — HTOL 125 °C @ 4.5 V](results/weibull_probability_plot_HTOL_125C_4.5V.png)  
 ![Weibull Probability Plot — HTOL 150 °C @ 5.0 V](results/weibull_probability_plot_HTOL_150C_5.0V.png)  
-
-**My Comment:**
 
 Both HTOL groups fit cleanly to a Weibull distribution. This confirms **wear-out is the dominant mode** and that no unexpected early-life (“infant mortality”) failures are present in this sample dataset.  
 
@@ -125,10 +113,7 @@ Both HTOL groups fit cleanly to a Weibull distribution. This confirms **wear-out
 - Positive slope in ln(η) vs 1/T, shorter lifetimes at higher T supports Arrhenius acceleration.  
 - Extracted slope corresponds to realistic **activation energy**.   
 
-📈 Plot:  
 ![Arrhenius HTOL](results/arrhenius_lneta_vs_invT_HTOL.png)
-
-**My Comment:**
 
 The slope suggests an activation energy in the range expected for **diffusion-driven degradation mechanisms** (~0.6–0.8 eV). This is in line with published semiconductor reliability models, making our synthetic data look quite realistic.  
 
@@ -147,29 +132,14 @@ The slope suggests an activation energy in the range expected for **diffusion-dr
 
 ## Repository Structure 
 
-reliability_demo/    # Python package (data, Weibull fits, plotting, CLI)
-notebooks/           # Clean showcase notebook
-data/                # Synthetic dataset
-results/             # Output plots + CSV summaries
-requirements.txt     # Dependencies
-README.md            # Project overview
-
----
-
-## Limitations & Future Work  
-
-### Limitations  
-- Here Dataset is **synthetic**; real semiconductor data would show mixed failure modes and noisier censoring.  
-- Only **temperature acceleration (Arrhenius)** was modeled; real devices require multi-stress models (Eyring).  
-- Did not include **degradation parameters** (e.g., leakage, ΔVth).  
-
-### Future Work  
-- Extend to **multi-stress acceleration models** (temperature + voltage + humidity).  
-- Incorporate **degradation measurements** alongside failure times.  
-- Apply **Bayesian or hierarchical models** for lot-to-lot variation.  
-- Project **field lifetime estimates** under normal operating conditions.
-- Apply *Machine Learning models** training and predict. 
-
+```text
+reliability_demo/    # Python package (data, Weibull fits, plotting, CLI)  
+notebooks/           # Clean showcase notebook  
+data/                # Synthetic dataset  
+results/             # Output plots + CSV summaries  
+requirements.txt     # Dependencies  
+README.md            # Project overview  
+``` 
 ---
 
 ### How to Run
@@ -186,3 +156,18 @@ python -m reliability_demo.cli --seed 2025
 
 # explore notebook
 jupyter notebook notebooks/reliability_pipeline.ipynb
+```
+
+## Limitations & Future Work  
+
+### Limitations  
+- Here Dataset is **synthetic**; real semiconductor data would show mixed failure modes and noisier censoring.  
+- Only **temperature acceleration (Arrhenius)** was modeled; real devices require multi-stress models (Eyring).  
+- Did not include **degradation parameters** (e.g., leakage, ΔVth).  
+
+### Future Work  
+- Extend to **multi-stress acceleration models** (temperature + voltage + humidity).  
+- Incorporate **degradation measurements** alongside failure times.  
+- Apply **Bayesian or hierarchical models** for lot-to-lot variation.  
+- Project **field lifetime estimates** under normal operating conditions.
+- Apply *Machine Learning models** training and predict.

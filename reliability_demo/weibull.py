@@ -1,4 +1,5 @@
-import numpy as np, pandas as pd
+import numpy as np
+import pandas as pd
 from scipy.special import gamma
 from reliability.Fitters import Fit_Weibull_2P
 

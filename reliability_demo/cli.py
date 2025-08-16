@@ -11,11 +11,9 @@ from reliability_demo.plots import (
     arrhenius_lneta_vs_invT,
 )
 
-
 def _ensure_dirs(out_data: str, out_dir: str) -> None:
     os.makedirs(os.path.dirname(out_data) or ".", exist_ok=True)
     os.makedirs(out_dir, exist_ok=True)
-
 
 def run_pipeline(
     seed: int = 2025,
@@ -54,7 +52,6 @@ def run_pipeline(
     )
     return df, fits
 
-
 def main():
     p = argparse.ArgumentParser(description="Semiconductor-style reliability pipeline")
     p.add_argument("--seed", type=int, default=2025)
@@ -77,14 +74,12 @@ def main():
         make_probplot=not args.no_probfplot if hasattr(args, "no_probfplot") else not args.no_probplot,
     )
 
-
 def main_notebook(seed=2025, out_data="data/reliability_synthetic.csv", out_dir="results"):
     """
     Notebook entrypoint: returns (df, fits) and writes CSVs/PNGs.
     """
     _ensure_dirs(out_data, out_dir)
     return run_pipeline(seed=seed, out_data=out_data, out_dir=out_dir)
-
 
 if __name__ == "__main__":
     main()

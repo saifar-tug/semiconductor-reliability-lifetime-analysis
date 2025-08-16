@@ -1,4 +1,5 @@
-import numpy as np, matplotlib.pyplot as plt, pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt, pandas as pd
 from lifelines import KaplanMeierFitter
 from reliability.Fitters import Fit_Weibull_2P
 

@@ -1,6 +1,6 @@
 import math, numpy as np, pandas as pd
 
-K_B = 8.617333262145e-5  # eV/K
+K_B = 8.617333262145e-5  # electronvolts per Kelvin (eV/K), Boltzmann constant (k_B)
 
 def voltage_factor(v: float) -> float:
     return 1.0 / (1.0 + 0.15 * (v - 3.3))

@@ -54,7 +54,7 @@ File: `results/km_medians_by_group.csv`
 
 File: `results/weibull_group_fits.csv` 
 - Fitted Weibull-2P parameters for each group.
-- β (shape): indicates failure mode (β>1 → wear-out).
+- β (shape): indicates failure mode (β>1 -> wear-out).
 - η (scale): characteristic life (hours).
 - Includes MTTF (mean time to failure) and hazard interpretation.
 
@@ -67,58 +67,60 @@ File: `results/arrhenius_fit_coeffs_HTOL.csv`
 
 ---
 
-## Key Analyses  
+## Key Analysis  
 
 ### Kaplan–Meier Survival by Stress Group  
-- HTOL @ 150 °C fails fastest (median ≈ 270 h).  
-- HTOL @ 125 °C lasts longer (median ≈ 704 h).  
-- THB (85 °C) and TC (-40 °C, 125 °C) show little degradation.  
+- HTOL @ 150 °C fails fastest (median ≈ 270 h).
+- HTOL @ 125 °C lasts longer (median ≈ 704 h).
+- THB (85 °C) and TC (-40 °C, 125 °C) show minimal degradation within test duration.  
 
 ![Kaplan–Meier Survival](results/km_by_group_publication.png)  
 
-This was expected since HTOL at higher temperature quickly accelerates wear-out mechanisms like **electromigration** and **oxide breakdown**, while humidity and thermal cycling take much longer to manifest failures.  
+HTOL at higher temperature accelerates **electromigration** and **oxide breakdown**, while humidity bias (THB) and thermal cycling (TC) induce failures much more slowly, so survival remains high in this test window.  
 
 ---
 
 ### Failure Time Density by Test Type  
-- HTOL has a broad failure distribution due to combined **temperature + voltage** acceleration.  
-- TC and THB failures cluster tightly, with failures clustered around specific stress points.  
+- HTOL shows a broad failure distribution due to combined **temperature + voltage** acceleration.  
+- TC and THB distributions are much narrower, with failures concentrated around stress thresholds.  
 
 ![Failure Density](results/density_by_testtype.png)  
 
-The wider HTOL distribution reflects device-to-device variation in how quickly transistors degrade. In contrast, TC and THB failures are more uniform since they’re driven by physical stress thresholds like **package cracking** or **moisture ingress**.  
+The wider HTOL spread reflects device-to-device variability in degradation rates (e.g., electromigration onset). By contrast, TC and THB failures occur more uniformly, triggered by **package cracking** or **moisture ingress** once specific stress limits are reached.  
 
 ---
 
 ### Weibull Parameters vs Temperature  
-- **β > 1** → wear-out dominated failures.  
+- **β > 1** : wear-out dominated failures.  
 - **η decreases with temperature** (HTOL), confirming stress acceleration.  
 - TC/THB have higher η (longer lifetimes).  
 
 ![Weibull Parameters](results/weibull_group_params_vs_temp.png) 
 
-The rising β with temperature means the devices don’t fail randomly, instead they fail progressively faster as stress accumulates. Lower η at 150 °C confirms **temperature-activated aging** is dominant.  
+The upward trend in β at higher HTOL stress means devices fail more progressively once wear-out mechanisms (like electromigration or oxide breakdown) start. The drop in η at 150 °C clearly reflects **temperature-activated aging**, may reducing lifetime. HTOL shows decreasing η with temperature, confirms acceleration. TC has higher η, consistent with its slower degradation.
 
 ---
 
 ### Weibull Probability Plots (Fit Quality Checks)  
-- Empirical points align closely with the Weibull fitted CDF.  
-- Confidence intervals are narrow, this is stable estimates.  
+- **HTOL @ 125 °C, 4.5 V: η ≈ 916 h and β ≈ 2.05**, here devices show wear-out failures at a moderate pace.
+- **HTOL @ 150 °C, 5.0 V: η ≈ 313 h and β ≈ 2.10**, visibly much shorter lifetimes due to higher stress, but similar failure mode.
+- When stress ↑ -> η ↓, β stable -> same failure mode.
+- In both plots, points align closely with the fitted Weibull CDF, and confidence intervals are narrow, confirming stable parameter estimates. 
 
 ![Weibull Probability Plot — HTOL 125 °C @ 4.5 V](results/weibull_probability_plot_HTOL_125C_4.5V.png)  
 ![Weibull Probability Plot — HTOL 150 °C @ 5.0 V](results/weibull_probability_plot_HTOL_150C_5.0V.png)  
 
-Both HTOL groups fit cleanly to a Weibull distribution. This confirms **wear-out is the dominant mode** and that no unexpected early-life (“infant mortality”) failures are present in this sample dataset.  
+Its evident that **increasing temperature accelerates degradation (lower η)**, while the **failure mechanism remains the same (β ~ 2)**. No evidence of early-life (“infant mortality”) failures is seen, may consistent with controlled semiconductor reliability testing using this sample dataset.  
 
 ---
 
 ### Arrhenius Temperature Acceleration (HTOL)  
 - Positive slope in ln(η) vs 1/T, shorter lifetimes at higher T supports Arrhenius acceleration.  
-- Extracted slope corresponds to realistic **activation energy**.   
+- Extracted slope corresponds to realistic **activation energy (~0.6–0.8 eV)**, typical for diffusion-driven mechanisms like electromigration or oxide wear-out.
 
 ![Arrhenius HTOL](results/arrhenius_lneta_vs_invT_HTOL.png)
 
-The slope suggests an activation energy in the range expected for **diffusion-driven degradation mechanisms** (~0.6–0.8 eV). This is in line with published semiconductor reliability models, making our synthetic data look quite realistic.  
+This means our **synthetic data** reproduces the kind of temperature dependence expected in real semiconductor qualification. Such fits are used to extrapolate device lifetimes from accelerated stress (125–150 °C) down to normal operating conditions (e.g., 55–85 °C). 
 
 ---
 
@@ -133,7 +135,7 @@ The slope suggests an activation energy in the range expected for **diffusion-dr
 
 ---
 
-## Repository Structure 
+## Repo Structure 
 
 ```text
 reliability_demo/    # Python package (data, Weibull fits, plotting, CLI)  
@@ -172,4 +174,4 @@ jupyter notebook notebooks/reliability_pipeline.ipynb
 - Incorporate **degradation measurements** alongside failure times.  
 - Apply **Bayesian or hierarchical models** for lot-to-lot variation.  
 - Project **field lifetime estimates** under normal operating conditions.
-- Apply *Machine Learning models** training and predict.
+- Apply **Machine Learning models** training and predict.
